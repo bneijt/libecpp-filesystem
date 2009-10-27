@@ -1,0 +1,14 @@
+#include "path.hh"
+
+//Global headers
+#include <vector>
+#include <numeric> 
+#include <sstream>
+
+//Project headers
+
+//Macro defining headers
+#include "../misc/debug.hh"
+
+using namespace ecpp;
+using namespace std;

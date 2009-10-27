@@ -1,0 +1,76 @@
+/*
+  ccbuild - A strict developer's build utility
+  Copyright (C) 2008  A. Bram Neijt <bneijt@gmail.com>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+///\file
+///\brief Preprosessor macro's for easy debug info printing
+///
+///These preprosessor instructions place info as debugging information on the screen.
+///You should use DEBUGLEVEL to set the level of debugging info you want. When DEBUGLEVEL is not defined
+/// these macro's evaluate to nothing.
+///
+///If DEBUGLEVEL is set to 1, Level1 debug info is printed. If DEBUGLEVEL is set to 2, all Level2 and lower are printed. etc.
+///
+///To set the debuglevel of a class, place \#define DEBUGLEVEL in the internal header file (in contrast to the header). This will keep multiple defenitions from occuring when compiling.
+///
+///The output generated is: "[Filename]:[Line number]: [information]\n"
+///
+///The extraction operator is used for creating the debug line, so info can contain more then multiple elements devided
+/// by extraction operators.
+///\section examples Examples
+///\code
+/// __debugLevel2("Starting algorithm with:" << "something.");
+/// __debugLevel3("And thinking about running it" << i << " times.");
+///\endcode
+
+//No include guards, to keep the defenitions as much up to date as possible, due to the dependencie on DEBUGLEVEL.
+#ifdef NODEBUG
+  #ifdef DEBUGLEVEL
+    #undef DEBUGLEVEL
+  #endif
+  #define DEBUGLEVEL 0
+#endif
+
+#if DEBUGLEVEL > 0
+#include <iostream>
+	#define __debugLevel1(info) std::cerr << "D1:" << __FILE__ << ":" << __LINE__ << ": " << info << std::endl
+#else
+	///\brief Output info when DEBUGLEVEL is 1 or more
+	#define __debugLevel1(info)
+#endif
+
+#if DEBUGLEVEL > 1
+	#define __debugLevel2(info) std::cerr << "D2:" << __FILE__ << ":" << __LINE__ << ": " << info << std::endl
+#else
+	///\brief Output info when DEBUGLEVEL is 2 or more
+	#define __debugLevel2(info)
+#endif
+
+#if DEBUGLEVEL > 2
+	#define __debugLevel3(info) std::cerr << "D3:" << __FILE__ << ":" << __LINE__ << ": " << info << std::endl
+#else
+	///\brief Output info when DEBUGLEVEL is 3 or more
+	#define __debugLevel3(info)
+#endif
+
+#if DEBUGLEVEL > 3
+	#define __debugLevel4(info) std::cerr << "D4:" << __FILE__ << ":" << __LINE__ << ": " << info << std::endl
+#else
+	///\brief Output info when DEBUGLEVEL is 4 or more
+	#define __debugLevel4(info)
+#endif
