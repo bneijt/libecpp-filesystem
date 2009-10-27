@@ -1,3 +1,8 @@
 Lib ecpp filesystem module
 
 Part of the libecpp project
+
+http://github.com/mvdsanden/libecpp
+
+Build dependencies will be (in the future)
+http://github.com/mvdsanden/libecpp-common

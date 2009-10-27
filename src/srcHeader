@@ -1,12 +1,12 @@
 /*
-  This file is part of libecpp-module_name.
+  This file is part of libecpp-filesystem.
 
-  libecpp-module_name is free software: you can redistribute it and/or modify
+  libecpp-filesystem is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  libecpp-mofule_name is distributed in the hope that it will be useful,
+  libecpp-filesystem is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.

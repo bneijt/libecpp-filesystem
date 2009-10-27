@@ -15,6 +15,9 @@
   along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef __inc_ecpp_path_hh__
+#define __inc_ecpp_path_hh__
+
 #include <string>
 
 namespace ecpp
@@ -38,14 +41,24 @@ class Path
     Path(std::string const &path)
       :
       d_path(path)
-    {}
+    {
+      while(d_path[d_path.size() -1] == '/')
+        d_path = d_path.substr(0, d_path.size() -1);
+    }
     
     Path const &clean();
     Path const &cleaned() const
     {
       return Path(*this).clean();
     }
+    ///\brief Join two or paths
+    Path const &operator/(Path const &other) const
+    {
+      return Path(d_path + "/" + other.d_path);
+    }
     
 };
 
 }//end of namespace cpp
+
+#endif

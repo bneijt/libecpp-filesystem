@@ -8,7 +8,7 @@
 //Project headers
 
 //Macro defining headers
-#include "../misc/debug.hh"
+#include <ecpp/debug/debug.hh>
 
 using namespace ecpp;
 using namespace std;
