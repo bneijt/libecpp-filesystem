@@ -4,6 +4,11 @@
 #include <vector>
 #include <numeric> 
 #include <sstream>
+#include <unistd.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <cstdlib>
 
 //Project headers
 

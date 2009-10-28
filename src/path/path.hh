@@ -20,6 +20,7 @@
 
 #include <string>
 
+
 namespace ecpp
 {
 
@@ -37,27 +38,66 @@ namespace ecpp
 class Path
 {
     std::string d_path;
+    
   public:
-    Path(std::string const &path)
-      :
-      d_path(path)
-    {
-      while(d_path[d_path.size() -1] == '/')
-        d_path = d_path.substr(0, d_path.size() -1);
-    }
+    Path(std::string const &path);
     
     Path const &clean();
     Path const &cleaned() const
     {
       return Path(*this).clean();
     }
+    
+    bool exists() const;
+    bool isAbsolute() const
+    {
+      return d_path.size() && d_path[0] == '/';
+    }
+    bool isRelative() const
+    {
+      return !isAbsolute();
+    }
+    
+    Path const &rooted();
+    Path const &absolute() const
+    {
+      return Path(*this).rooted();
+    }
+
+    Path const& realPath();
+    
+    /** \brief FUTURE Return the shortest accurate path possible
+    
+      This will create various notations and return the
+      shortest version.
+
+    Path const &simplify();
+    Path const &simplified() const
+    {
+      return Path(*this).clean();
+    }
+    */
+    
     ///\brief Join two or paths
-    Path const &operator/(Path const &other) const
+    Path operator/(Path const &other) const
     {
       return Path(d_path + "/" + other.d_path);
     }
     
+    std::string const &str() const
+    {
+      return d_path;
+    }
+    
+    ///Static members    
+    static Path currentWorkingDirectory();  
+    
 };
+
+std::ostream &operator<<(std::ostream &s, Path const &p)
+{
+  return s << p.str();
+}
 
 }//end of namespace cpp
 
