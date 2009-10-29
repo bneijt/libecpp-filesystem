@@ -94,7 +94,7 @@ class Path
     
 };
 
-std::ostream &operator<<(std::ostream &s, Path const &p)
+inline std::ostream &operator<<(std::ostream &s, Path const &p)
 {
   return s << p.str();
 }
