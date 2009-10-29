@@ -89,6 +89,8 @@ namespace ecpp
     ///Static members
     static Path currentWorkingDirectory();
 
+    static Path home();
+
   };
 
   inline std::ostream &operator<<(std::ostream &s, Path const &p)
