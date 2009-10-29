@@ -79,6 +79,8 @@ namespace ecpp
 
     std::string const &str() const;
 
+    Path up() const;
+
     /**
      *  Attempt to make the path (as in mkdir).
      */
