@@ -4,11 +4,16 @@
 #include <vector>
 #include <numeric> 
 #include <sstream>
+#include <unistd.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <cstdlib>
 
 //Project headers
 
 //Macro defining headers
-#include "../misc/debug.hh"
+#include <ecpp/debug/debug.hh>
 
 using namespace ecpp;
 using namespace std;

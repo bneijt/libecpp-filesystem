@@ -14,3 +14,19 @@
   You should have received a copy of the GNU General Public License
   along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#include "path.ih"
+
+Path const & Path::rooted()
+{
+  //If it exists, use the os realpath
+  if(exists())
+  {
+    realPath();
+    return *this;
+  }
+  //If this is a relative path, then root it with cwd
+  if(isRelative())
+    *this = currentWorkingDirectory() / *this;
+  return *this;
+}

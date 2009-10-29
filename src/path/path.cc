@@ -14,3 +14,13 @@
   You should have received a copy of the GNU General Public License
   along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#include "path.ih"
+
+Path::Path(std::string const &path)
+  :
+  d_path(path)
+{
+  while(d_path.size() && d_path[d_path.size() -1] == '/')
+    d_path = d_path.substr(0, d_path.size() -1);
+}

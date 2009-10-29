@@ -21,7 +21,7 @@ Path const &Path::clean()
 {
 	//TODO Use a standard function for this, I might overlook something here
  	//Strip filename of excess ../ parts
- 	__debugLevel2("Clean path from: " << d_path);
+ 	__debug(2, "Clean path from: " << d_path);
  	istringstream f(d_path);
   size_t partNum = 0;
  	vector<string> path;
@@ -50,7 +50,7 @@ Path const &Path::clean()
 	    continue;
 	  }
       
-    __debugLevel4("push " << part << "/");
+    __debug(4, "push " << part << "/");
 		path.push_back(part + "/");
 	}
 	string clean = accumulate(path.begin(), path.end(), string());
@@ -65,7 +65,7 @@ Path const &Path::clean()
   //Return a single "." if we want the current path
  	if(clean.empty())
  	  clean = ".";
-  __debugLevel2("Cleaned path to: " << clean);
+  __debug(2, "Cleaned path to: " << clean);
   d_path = clean;
   return *this;
 }

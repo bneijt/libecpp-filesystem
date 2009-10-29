@@ -15,7 +15,11 @@
   along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef __inc_ecpp_path_hh__
+#define __inc_ecpp_path_hh__
+
 #include <string>
+
 
 namespace ecpp
 {
@@ -34,11 +38,9 @@ namespace ecpp
 class Path
 {
     std::string d_path;
+    
   public:
-    Path(std::string const &path)
-      :
-      d_path(path)
-    {}
+    Path(std::string const &path);
     
     Path const &clean();
     Path const &cleaned() const
@@ -46,6 +48,57 @@ class Path
       return Path(*this).clean();
     }
     
+    bool exists() const;
+    bool isAbsolute() const
+    {
+      return d_path.size() && d_path[0] == '/';
+    }
+    bool isRelative() const
+    {
+      return !isAbsolute();
+    }
+    
+    Path const &rooted();
+    Path const &absolute() const
+    {
+      return Path(*this).rooted();
+    }
+
+    Path const& realPath();
+    
+    /** \brief FUTURE Return the shortest accurate path possible
+    
+      This will create various notations and return the
+      shortest version.
+
+    Path const &simplify();
+    Path const &simplified() const
+    {
+      return Path(*this).clean();
+    }
+    */
+    
+    ///\brief Join two or paths
+    Path operator/(Path const &other) const
+    {
+      return Path(d_path + "/" + other.d_path);
+    }
+    
+    std::string const &str() const
+    {
+      return d_path;
+    }
+    
+    ///Static members    
+    static Path currentWorkingDirectory();  
+    
 };
 
+std::ostream &operator<<(std::ostream &s, Path const &p)
+{
+  return s << p.str();
+}
+
 }//end of namespace cpp
+
+#endif
