@@ -37,19 +37,33 @@ namespace ecpp
   */
   class Path
   {
+
     std::string d_path;
 
   public:
+
+    /**
+     *  Create a path with path.
+     */
     Path(std::string const &path);
 
     Path const &clean();
 
     Path const &cleaned() const;
 
+    /**
+     *  @returns true if the path exists on the filesystem.
+     */
     bool exists() const;
 
+    /**
+     *  @returns true if this is an absolute path.
+     */
     bool isAbsolute() const;
 
+    /**
+     *  @returns true if this is a relative path.
+     */
     bool isRelative() const;
 
     /* realPath apparently not yet implemented!
@@ -77,8 +91,20 @@ namespace ecpp
     ///\brief Join two or paths
     Path operator/(Path const &other) const;
 
+    /**
+     *  Erases the first part of this path as far as it compares to other
+     *  and returns this.
+     */
+    Path operator-(Path const &other) const;
+
+    /**
+     *  @returns a string representation of the path.
+     */
     std::string const &str() const;
 
+    /**
+     *  @returns one directory up.
+     */
     Path up() const;
 
     /**
@@ -87,8 +113,15 @@ namespace ecpp
     bool make();
 
     ///Static members
+
+    /**
+     *  @returns the current working directory.
+     */
     static Path currentWorkingDirectory();
 
+    /**
+     *  @returns the home directory of the current user.
+     */
     static Path home();
 
   };
@@ -111,11 +144,6 @@ namespace ecpp
   inline bool Path::isRelative() const
   {
     return !isAbsolute();
-  }
-
-  inline Path Path::operator/(Path const &other) const
-  {
-    return Path(d_path + "/" + other.d_path);
   }
 
   inline std::string const &Path::str() const
