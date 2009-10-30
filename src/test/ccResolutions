@@ -1,0 +1,27 @@
+#& -l --md5 -p --args "-O3 -g -Wall -lecpp-common"
+#-l Highlight
+#-p Precompile (yes really it is faster, although it might not seem that way)
+# Try /usr/bin/time -o preproc.txt sh nodebug.sh -p and compare it to normal ;)
+sys/select.h	
+sys/stat.h	
+signal.h	
+netinet/in.h	
+
+sys/types.h	
+sys/socket.h	
+sys/time.h	
+time.h	-lrt
+netdb.h	
+arpa/inet.h	
+unistd.h	
+fcntl.h	
+emmintrin.h	
+values.h	
+xmmintrin.h	
+pthread.h		-lpthread
+ext/hash_map	-Wno-deprecated	
+
+sys/un.h	
+cstdint	
+stdint.h	
+libxml++/libxml++.h	`pkg-config libxml++-2.6 --cflags --libs`

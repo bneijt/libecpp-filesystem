@@ -24,80 +24,134 @@
 namespace ecpp
 {
 
-/**\brief Path handling object
+  /**\brief Path handling object
 
   The path object is meant to handle everything you might want to do with a path:
-    create an absolute form,
-    join
-    split
-  
+  create an absolute form,
+  join
+  split
+
   Manipulating the filesystem:
-    create a directory for it
-    test it's status
-*/
-class Path
-{
+  create a directory for it
+  test it's status
+  */
+  class Path
+  {
+
     std::string d_path;
-    
+
   public:
+
+    /**
+     *  Create a path with path.
+     */
     Path(std::string const &path);
-    
+
     Path const &clean();
-    Path const &cleaned() const
-    {
-      return Path(*this).clean();
-    }
-    
+
+    Path const &cleaned() const;
+
+    /**
+     *  @returns true if the path exists on the filesystem.
+     */
     bool exists() const;
-    bool isAbsolute() const
-    {
-      return d_path.size() && d_path[0] == '/';
-    }
-    bool isRelative() const
-    {
-      return !isAbsolute();
-    }
-    
+
+    /**
+     *  @returns true if this is an absolute path.
+     */
+    bool isAbsolute() const;
+
+    /**
+     *  @returns true if this is a relative path.
+     */
+    bool isRelative() const;
+
+    /* realPath apparently not yet implemented!
+
     Path const &rooted();
     Path const &absolute() const
     {
-      return Path(*this).rooted();
+    return Path(*this).rooted();
     }
+    */
+    //    Path const& realPath();
 
-    Path const& realPath();
-    
     /** \brief FUTURE Return the shortest accurate path possible
-    
-      This will create various notations and return the
-      shortest version.
+
+    This will create various notations and return the
+    shortest version.
 
     Path const &simplify();
     Path const &simplified() const
     {
-      return Path(*this).clean();
+    return Path(*this).clean();
     }
     */
-    
-    ///\brief Join two or paths
-    Path operator/(Path const &other) const
-    {
-      return Path(d_path + "/" + other.d_path);
-    }
-    
-    std::string const &str() const
-    {
-      return d_path;
-    }
-    
-    ///Static members    
-    static Path currentWorkingDirectory();  
-    
-};
 
-std::ostream &operator<<(std::ostream &s, Path const &p)
-{
-  return s << p.str();
-}
+    ///\brief Join two or paths
+    Path operator/(Path const &other) const;
+
+    /**
+     *  Erases the first part of this path as far as it compares to other
+     *  and returns this.
+     */
+    Path operator-(Path const &other) const;
+
+    /**
+     *  @returns a string representation of the path.
+     */
+    std::string const &str() const;
+
+    /**
+     *  @returns one directory up.
+     */
+    Path up() const;
+
+    /**
+     *  Attempt to make the path (as in mkdir).
+     */
+    bool make();
+
+    ///Static members
+
+    /**
+     *  @returns the current working directory.
+     */
+    static Path currentWorkingDirectory();
+
+    /**
+     *  @returns the home directory of the current user.
+     */
+    static Path home();
+
+  };
+
+  inline std::ostream &operator<<(std::ostream &s, Path const &p)
+  {
+    return s << p.str();
+  }
+
+  inline Path const &Path::cleaned() const
+  {
+    return Path(*this).clean();
+  }
+
+  inline bool Path::isAbsolute() const
+  {
+    return d_path.size() && d_path[0] == '/';
+  }
+
+  inline bool Path::isRelative() const
+  {
+    return !isAbsolute();
+  }
+
+  inline std::string const &Path::str() const
+  {
+    return d_path;
+  }
+
+
 
 }//end of namespace cpp
 

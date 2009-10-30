@@ -17,6 +17,7 @@
 
 #include "path.ih"
 
+/*
 Path const & Path::rooted()
 {
   //If it exists, use the os realpath
@@ -30,3 +31,4 @@ Path const & Path::rooted()
     *this = currentWorkingDirectory() / *this;
   return *this;
 }
+*/
