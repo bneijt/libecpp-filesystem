@@ -6,3 +6,5 @@ http://github.com/mvdsanden/libecpp
 
 Build dependencies will be (in the future)
 http://github.com/mvdsanden/libecpp-common
+
+Doxygen generated documentation may be found at: http://logfish.net/pr/ecpp/
