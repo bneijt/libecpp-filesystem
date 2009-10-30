@@ -91,6 +91,10 @@ namespace ecpp
     ///\brief Join two or paths
     Path operator/(Path const &other) const;
 
+    ///\brief Concatenate two paths
+    Path operator+(Path const &other) const;
+
+
     /**
      *  Erases the first part of this path as far as it compares to other
      *  and returns this.

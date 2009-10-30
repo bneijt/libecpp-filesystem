@@ -4,6 +4,7 @@
 
 Path Path::operator/(Path const &other) const
 {
+  //TODO Move this split into path itself as a string split will not take "\/" into account
   // Split path into separate elements and concatenate.
   vector<string> a = String::split(d_path,"/") + String::split(other.d_path,"/");
 
@@ -18,6 +19,13 @@ Path Path::operator/(Path const &other) const
   return Path(String::combine(a,"/"));
 }
 
+Path Path::operator+(Path const &other) const
+{
+  // Concat two paths
+  if(other.isRelative())
+    return Path(d_path + "/" + other.d_path);
+  return Path(d_path + other.d_path);  
+}
 
 Path Path::operator-(Path const &other) const
 {
